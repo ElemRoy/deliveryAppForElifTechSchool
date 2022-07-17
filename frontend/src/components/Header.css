@@ -1,0 +1,15 @@
+.linkContainer {
+    background-color: #f95959;
+    box-shadow: 0 1px 4px #f95959;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 120px;
+    border-radius: 10px;
+}
+
+.link {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    margin: 10px;
+}
