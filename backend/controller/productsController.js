@@ -12,9 +12,9 @@ const getAllProducts = async (req, res) => {
 }
 
 
-const getProductsByCompany = async (req, res) => {
+const getProductsById = async (req, res) => {
     try {
-        const products = await product.find({company: req.params.company});
+        const products = await product.findById(req.params.id);
 
         res.json(products);
     } catch (error){
@@ -25,5 +25,5 @@ const getProductsByCompany = async (req, res) => {
 
 module.exports = {
     getAllProducts,
-    getProductsByCompany
+    getProductsById
 }

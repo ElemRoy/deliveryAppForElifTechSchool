@@ -99,3 +99,7 @@ h1 {
     margin-top: -10px;
     user-select: none;
 }
+
+.closed {
+    color: black;
+}
