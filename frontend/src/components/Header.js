@@ -6,6 +6,7 @@ function Header() {
     <div class="linkContainer">
       <Link to='/' class="link">Shop</Link>
       <Link to='/cart' class="link">Cart</Link>
+      <Link to='/orders' class="link">Orders</Link>
     </div>
   );
 }

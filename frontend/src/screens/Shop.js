@@ -10,7 +10,6 @@ function Shop(props) {
   const { cartItems } = cart;
 
   const addToCartHandler = (event) => {
-    console.log(event.currentTarget.id);
     dispatch(addToCart(event.currentTarget.id));
     //history.push("/cart");
   }
@@ -33,23 +32,21 @@ function Shop(props) {
     return companies;
   }
 
-  const initCompany = () => {
-    console.log('init');
-    if(cartItems.length !== 0) {
-      return getCompanies(cartItems)[0];
-    } else {
-      return getCompanies(products)[0];
-    } 
-  }
-
-  const [selectedCompany, setSelectedCompany] = useState(initCompany());
+  const [selectedCompany, setSelectedCompany] = useState(null);
   
   const selectCompany = (event) => {
     if(cartItems.length === 0){
       setSelectedCompany(event.currentTarget.textContent);
     } 
   };
-
+  
+  useEffect(() => {
+    if(cartItems.length !== 0) {
+      setSelectedCompany(getCompanies(cartItems)[0]);
+    } else {
+      setSelectedCompany(getCompanies(products)[0]);
+    } 
+  }, [products])
 
   return (
     <div class='container'>

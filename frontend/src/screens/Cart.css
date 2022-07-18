@@ -24,6 +24,7 @@ h1 {
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
     color: #e3e3e3;
     overflow-x: hidden;
+    scroll-behavior: smooth;
 }
 
 .navBar {
@@ -36,6 +37,7 @@ h1 {
     margin-left: 2%;
     overflow-y: auto;
     height: auto;
+    scroll-behavior: smooth;
 }
 
 .inputs {
@@ -60,6 +62,13 @@ h1 {
     height: 25px;
     position: relative;
     left: 20px;
+    border-radius: 6px;
+    border-style: none;
+    transition: 0.5s;
+}
+
+.input:hover {
+    transform: scale(110%);
 }
 
 .submitBack {
@@ -93,8 +102,12 @@ h1 {
     border-radius: 5px;
     color: white;
     user-select: none;
+    transition: 0.5s;
 }
 
+.submit:hover {
+    transform: scale(110%);
+}
 
 .cartProducts {
     display: flex;
@@ -114,6 +127,11 @@ h1 {
     height: 250px;
     margin-right: 50px;
     margin-bottom: 30px;
+    transition: 0.5s;
+}
+
+.cartProduct:hover {
+    transform: scale(105%);
 }
 
 .cartProduct img{
@@ -136,14 +154,48 @@ h1 {
 
 .removeFromCart {
     background-color: #f95959;
-    margin-right: 5px;
+    margin-right: 2px;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 40px;
-    float: right;
+    width: auto;
     border-radius: 8px;
-    padding-left: 2px;
-    padding-right: 2px;
+    padding-left: 5px;
+    padding-right: 5px;
     user-select: none;
+    transform: scale(85%);
+    transition: 0.5s;
+}
+
+.removeFromCart:hover {
+    transform: scale(95%);
+}
+
+.qt {
+    font-size: 25px;
+}
+
+
+@media only screen and (max-width: 800px){
+    .container{
+        flex-direction: column;
+    }
+
+    .childContainer {
+        width: 95%;
+        margin-bottom: 20px;
+    }
+
+    .cartProduct {
+        width: 450px;
+        height: 230px;
+    }
+
+    .removeFromCart{
+        padding-left: 0;
+        padding-right: 0;
+        margin-right: 0;
+        height: 48px;
+    }
 }

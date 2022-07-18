@@ -8,7 +8,7 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
             const existProd = state.cartItems.find((x) => x.id === item.id);
             
             if(existProd){
-                const quantity = existProd.quantity + 1;
+                const quantity = Number(existProd.quantity) + 1;
                 return {
                     ...state,
                     cartItems: state.cartItems.map((x) => x.id === existProd.id ? {id: existProd.id, name: existProd.name, image: existProd.image, price: existProd.price, company: existProd.company, quantity} : x)
@@ -41,6 +41,11 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
             return{
                 ...state,
                 cartItems: state.cartItems.filter((x) => x.id !== action.payload)
+            }
+        case actionTypes.CART_RESET:
+            return{
+                ...state,
+                cartItems: []
             }
         default:
             return state;

@@ -4,7 +4,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 120px;
+    width: 200px;
     border-radius: 10px;
 }
 
@@ -12,4 +12,9 @@
     color: rgb(255, 255, 255);
     text-decoration: none;
     margin: 10px;
+    transition: 0.5s;
+}
+
+.link:hover {
+    transform: scale(115%);
 }
