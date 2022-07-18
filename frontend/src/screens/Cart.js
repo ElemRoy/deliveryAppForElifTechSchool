@@ -26,6 +26,21 @@ function Cart(products) {
   }
 
   const submit = (event) => {
+    const emailTest = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(_email);
+    const phoneTest = /^(([+]\d{2}[ ][1-9]\d{0,2}[ ])|([0]\d{1,3}[-]))((\d{2}([ ]\d{2}){2})|(\d{3}([ ]\d{3})*([ ]\d{2})+))$/.test(_phone);
+
+    if(emailTest === false) { setEmail("Wrong email"); }
+    if(phoneTest === false) { setPhone("Wrong phone"); }
+    if(_name === '') { setName("Empty name"); }
+    if(_address === '') { setAddress("Empty address") }
+
+    if(emailTest === false 
+      || phoneTest === false
+      || _name === '' || _name === "Empty name"
+      || _address === '' || _address === "Empty address"
+      || cartItems.length === 0
+      ) { return; }
+
     dispatch(addOrder({buyer: _name, email: _email, phone: _phone, address: _address, products: cartItems}));
     dispatch(resetCart());
   }
