@@ -5,7 +5,9 @@ How to run the website:
 1. Development:
   - Download the zip and dearchive
   - Open the extracted folder with VSCode
+  - Write "npm i --save-dev nodemon concurrently" and wait some time
   - Run "npm run dev" and wait some time for website on localhost to open
+  - Congrats!
   
 2. Build:
   - Set "frontend" in .gitignore
