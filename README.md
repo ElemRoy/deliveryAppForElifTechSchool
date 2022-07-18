@@ -1,5 +1,7 @@
 # deliveryAppForElifTechSchool
 
+URL: https://curious-eclair-9bd40e.netlify.app/
+
 How to run the website:
 
 1. Development:
