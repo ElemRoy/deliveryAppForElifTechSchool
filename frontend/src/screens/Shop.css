@@ -103,3 +103,8 @@ h1 {
 .closed {
     color: black;
 }
+
+.activated {
+    background-color: #f95959 !important;
+    color: black;
+}

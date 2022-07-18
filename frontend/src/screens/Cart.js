@@ -1,6 +1,26 @@
+import { useDispatch, useSelector } from 'react-redux';
 import './Cart.css'
 
+import { removeFromCart } from "../redux/actions/cartActions";
+
 function Cart(products) {
+  const dispatch = useDispatch();
+
+  const cart = useSelector(state => state.cart);
+  const { cartItems } = cart;
+  
+  const removePFromCart = (event) => {
+    dispatch(removeFromCart(event.currentTarget.id));
+  }
+
+  const getPrice = (products) => {
+    let price = 0;
+
+    products.map((product) => price = price + product.price * product.quantity);
+
+    return price;
+  }
+
   return (
     <div>
       <div class='container'>
@@ -33,28 +53,24 @@ function Cart(products) {
           <h1>Products:</h1>
 
           <div class='cartProducts'>
-            <div class='cartProduct'>
-              <img src="https://images.unsplash.com/photo-1607166452427-7e4477079cb9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"></img>
-              <p>Item A: 50$</p>
-              <p>Count</p>
-              <input type='number' min='1'></input>
-              <p>Final price: 200$</p>
-              <div class='removeFromCart'>Remove from cart</div>
-            </div>
-            <div class='cartProduct'>
-              <img src="https://images.unsplash.com/photo-1607166452427-7e4477079cb9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"></img>
-              <p>Item A: 50$</p>
-              <p>Count</p>
-              <input type='number' min='1'></input>
-              <p>Final price: 200$</p>
-              <div class='removeFromCart'>Remove from cart</div>
-            </div>
+              {cartItems.map((product) => {
+                return (
+                  <div class='cartProduct'>
+                    <img src={product.image}></img>
+                    <p>{product.name}: {product.price}$</p>
+                    <p>Count</p>
+                    <input type='number' min='1' value={product.quantity}></input>
+                    <p>Final price: {product.quantity * product.price}$</p>
+                    <div id={product.id} class='removeFromCart' onClick={removePFromCart}>Remove from cart</div>
+                  </div>
+                )
+              })}
           </div>
         </div>
       </div>
 
       <div class='submitBack'>
-        <p>Price</p>
+        <p>{getPrice(cartItems)}$</p>
         <div class='submit'>
           <div>Submit</div>
         </div>

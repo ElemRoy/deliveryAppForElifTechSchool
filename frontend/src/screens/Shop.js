@@ -5,17 +5,21 @@ import { getProducts as listProducts } from "../redux/actions/productActions";
 import { addToCart } from '../redux/actions/cartActions';
 
 function Shop(props) {
-  const [selectedCompany, setSelectedCompany] = useState(null);
+  const cart = useSelector(state => state.cart);
 
-  const selectCompany = (event) => {
-    setSelectedCompany(event.currentTarget.textContent);
-  };
+  const { cartItems } = cart;
 
   const addToCartHandler = (event) => {
     console.log(event.currentTarget.id);
-    dispatch(addToCart(event.currentTarget.id, 1));
+    dispatch(addToCart(event.currentTarget.id));
     //history.push("/cart");
   }
+
+  const dispatch = useDispatch();
+  const getProducts = useSelector((state) => state.getProducts);
+  const { products, loading, error } = getProducts;
+
+  useEffect(() => { dispatch(listProducts()); }, [dispatch]);
 
   function getCompanies (products){
     let companies = [];
@@ -29,11 +33,23 @@ function Shop(props) {
     return companies;
   }
 
-  const dispatch = useDispatch();
-  const getProducts = useSelector((state) => state.getProducts);
-  const { products, loading, error } = getProducts;
+  const initCompany = () => {
+    console.log('init');
+    if(cartItems.length !== 0) {
+      return getCompanies(cartItems)[0];
+    } else {
+      return getCompanies(products)[0];
+    } 
+  }
 
-  useEffect(() => { dispatch(listProducts()); }, [dispatch]);
+  const [selectedCompany, setSelectedCompany] = useState(initCompany());
+  
+  const selectCompany = (event) => {
+    if(cartItems.length === 0){
+      setSelectedCompany(event.currentTarget.textContent);
+    } 
+  };
+
 
   return (
     <div class='container'>
@@ -41,9 +57,30 @@ function Shop(props) {
         <h1>Shops:</h1>
         
         {getCompanies(products).map((company) => {
-          return(
-            <div class='companySlot' onClick={selectCompany}>{company}</div>
-          )
+          if(cartItems.length === 0){
+            if(company === selectedCompany){
+              return(
+                <div class='activated companySlot' onClick={selectCompany}>{company}</div>
+              )
+            }
+            else{
+              return(
+                <div class='companySlot' onClick={selectCompany}>{company}</div>
+              )
+            }
+          }
+          else {
+            if(company === selectedCompany){
+              return(
+                <div class='activated companySlot' onClick={selectCompany}>{company}</div>
+              )
+            }
+            else{
+              return(
+                <div class='closed companySlot' onClick={selectCompany}>{company}</div>
+              )
+            }
+          }
         })}
       </div>
 
